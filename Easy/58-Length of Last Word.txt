@@ -1,0 +1,11 @@
+//Length of Last Word
+
+import java.util.*;
+class Solution {
+    public int lengthOfLastWord(String s) {
+        StringTokenizer st = new StringTokenizer(s);
+        String sb = null;
+        while(st.hasMoreTokens()) sb = st.nextToken();
+        return sb.length();
+    }
+}
