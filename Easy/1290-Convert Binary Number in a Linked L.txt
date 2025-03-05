@@ -1,0 +1,20 @@
+//Convert Binary Number in a Linked List to Integer
+
+class Solution {
+    public int getDecimalValue(ListNode head) {
+        List<Integer> bin = new ArrayList<>();
+        ListNode temp = head;
+
+        while(temp != null){
+            bin.add(temp.val);
+            temp = temp.next;
+        }
+
+        int sum = 0, pow = 1;
+        for(int j=bin.size()-1; j>=0; j--){
+            sum += bin.get(j) * pow;
+            pow *= 2;
+        }
+        return sum;
+    }
+}
