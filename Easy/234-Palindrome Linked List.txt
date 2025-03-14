@@ -1,0 +1,19 @@
+//Palindrome Linked List
+
+class Solution {
+    public static int[] arr = new int[100000];
+    public boolean isPalindrome(ListNode head) {
+        ListNode temp = head;
+
+        int i=0;
+        while(temp != null){
+            arr[i++] = temp.val;
+            temp = temp.next;
+        }
+        int j=0, k=i-1;
+        while(j<k){
+            if(arr[j++] != arr[k--]) return false;
+        }
+        return true;
+    }
+}
