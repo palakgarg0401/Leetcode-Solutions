@@ -1,0 +1,22 @@
+//Third Maximum Number
+
+class Solution {
+    public int thirdMax(int[] nums) {
+        long first = Long.MIN_VALUE, second = Long.MIN_VALUE, third = Long.MIN_VALUE;
+        for(int a : nums){
+            if(a > first){
+                third = second;
+                second = first;
+                first = a;
+            }
+            else if(a > second && a != first){
+                third = second;
+                second = a;
+            }
+            else if(a > third && a != first && a != second){
+                third = a;
+            }
+        }
+        return third != Long.MIN_VALUE ? (int)third : (int)first;
+    }
+}
