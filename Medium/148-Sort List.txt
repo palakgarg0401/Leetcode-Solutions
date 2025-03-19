@@ -1,0 +1,28 @@
+//Sort List
+
+class Solution {
+    public ListNode sortList(ListNode head) {
+        if(head == null || head.next == null) return head;
+        ListNode temp = head;
+        int n = 0;
+        while(temp != null){
+            n++;
+            temp = temp.next;
+        }
+        int[] arr = new int[n];
+        temp = head;
+        int i = 0;
+        while(temp != null){
+            arr[i++] = temp.val;
+            temp = temp.next;
+        }
+        Arrays.sort(arr);
+        temp = head;
+        i = 0;
+        while(temp != null){
+            temp.val = arr[i++];
+            temp = temp.next;
+        }
+        return head;
+    }
+}
