@@ -1,0 +1,12 @@
+//Sum of Unique Elements
+
+import java.util.Arrays;
+class Solution {
+    public int sumOfUnique(int[] nums) {
+        int n = nums.length, sum = 0;
+        int[] count = new int[101];
+        for(int num : nums) count[num]++;
+        for(int num : nums) if(count[num] == 1) sum += num;
+        return sum;
+    }
+}
