@@ -1,0 +1,22 @@
+//Delete the Middle Node of a Linked List
+
+class Solution {
+    public ListNode deleteMiddle(ListNode head) {
+        if(head == null || head.next == null) return null;
+        ListNode temp = head;
+        int count = 0, mid = 0;
+        while(temp != null){
+            count++;
+            temp = temp.next;
+        }
+        if(count == 1) return null;
+        else mid = count/2;
+
+        ListNode t = head;
+        for(int i=0; i<mid-1; i++){
+            t = t.next;
+        }
+        t.next = t.next.next;
+        return head;
+    }
+}
