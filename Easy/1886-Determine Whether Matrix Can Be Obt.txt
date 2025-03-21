@@ -1,0 +1,31 @@
+//Determine Whether Matrix Can Be Obtained By Rotation
+
+import java.util.Arrays;
+class Solution {
+    static void rotate(int[][] mat){
+        int n = mat.length;
+        for(int i=0; i<n; i++){
+            for(int j=i+1; j<n; j++){
+                int temp = mat[i][j];
+                mat[i][j] = mat[j][i];
+                mat[j][i] = temp;
+            }
+        }
+        for(int[] i : mat){
+            int st = 0, end = n-1;
+            while(st<end){
+                int a = i[st];
+                i[st] = i[end];
+                i[end] = a;
+                st++; end--;
+            }
+        }
+    }
+    static boolean findRotation(int[][] mat, int[][] target) {
+        for(int i=0; i<4; i++){
+            rotate(mat);
+            if(Arrays.deepEquals(mat, target)) return true;
+        }
+        return false;
+    }
+}
