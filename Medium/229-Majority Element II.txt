@@ -1,0 +1,20 @@
+//Majority Element II
+
+class Solution {
+    public List<Integer> majorityElement(int[] nums) {
+        int n = nums.length;
+        List<Integer> list = new ArrayList<>();
+        if(n == 0) return list;
+        Arrays.sort(nums);
+        int count = 1;
+        for(int i=1; i<n; i++){
+            if(nums[i] == nums[i-1]) count++;
+            else{
+                if(count > n/3) list.add(nums[i-1]);
+                count = 1;
+            }
+        }
+        if(count > n/3) list.add(nums[n-1]);
+        return list;
+    }
+}
