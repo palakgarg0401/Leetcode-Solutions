@@ -1,0 +1,35 @@
+//Squares of a Sorted Array
+
+//Approach 1
+class Solution {
+    public int[] sortedSquares(int[] nums) {
+        int n = nums.length;
+        int[] res = new int[n];
+        int st = 0, end = n - 1, i = n - 1;
+        while(end>=0 && st<n && i>=0){
+            if(Math.abs(nums[end]) > Math.abs(nums[st])){
+                res[i] = nums[end] * nums[end];
+                end--;
+            }
+            else{
+                res[i] = nums[st] * nums[st];
+                st++;
+            }
+            i--;
+        }
+        return res;
+    }
+}
+
+
+//Approach 2
+class Solution {
+    public int[] sortedSquares(int[] nums) {
+        int n = nums.length;
+        for(int i=0; i<n; i++){
+            nums[i] *= nums[i];
+        }
+        Arrays.sort(nums);
+        return nums;
+    }
+}
