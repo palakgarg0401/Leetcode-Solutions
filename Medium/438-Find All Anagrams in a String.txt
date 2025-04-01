@@ -1,0 +1,38 @@
+//Find All Anagrams in a String
+
+class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+        int k = p.length();
+        int n = s.length();
+        List<Integer> list = new ArrayList<>();
+
+        Map<Character, Integer> map = new HashMap<>();
+        for(char ch : p.toCharArray()){
+            map.put(ch, map.getOrDefault(ch, 0) + 1);
+        }
+
+        int diffcount = map.size();
+        int i = 0, j = 0;
+
+        while(j < n){
+            char ch = s.charAt(j);
+            if(map.containsKey(ch)){
+                map.put(ch, map.get(ch) - 1);
+                if(map.get(ch) == 0) diffcount--;
+            }
+
+            if(j - i + 1 == k){
+                if(diffcount == 0) list.add(i);
+
+                char left = s.charAt(i);
+                if(map.containsKey(left)){
+                    if(map.get(left) == 0) diffcount++;
+                    map.put(left, map.get(left) + 1);
+                }
+                i++;
+            }
+            j++;
+        }
+        return list;
+    }
+}
