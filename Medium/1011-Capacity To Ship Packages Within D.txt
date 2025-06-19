@@ -1,0 +1,44 @@
+//Capacity To Ship Packages Within D Days
+
+class Solution {
+    public int shipWithinDays(int[] weights, int days) {
+        int st = Integer.MIN_VALUE;
+        int end = 0;
+
+        for(int w : weights) {
+            if(w > st) st = w;
+            end += w;
+        }
+
+        int ans = -1;
+        while(st <= end) {
+            int mid = st + (end - st) / 2;
+            if(isShipment(weights, mid, days)) {
+                ans = mid;
+                end = mid - 1;
+            }
+            else {
+                st = mid + 1;
+            }
+        }
+
+        return ans;
+    }
+
+    boolean isShipment(int[] weights, int maxCapacity, int days) {
+        int currentDay = 1;
+        int capacity = 0;
+
+        for(int w : weights) {
+            capacity += w;
+            if(capacity > maxCapacity) {
+                currentDay++;
+                capacity = w;
+            }
+
+            if(currentDay > days) return false;
+        }
+
+        return true;
+    }
+}
