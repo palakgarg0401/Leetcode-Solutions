@@ -1,0 +1,25 @@
+//Koko Eating Bananas
+
+class Solution {
+    public int minEatingSpeed(int[] piles, int h) {
+        int st = 1, end = Integer.MIN_VALUE;
+        for(int p : piles){
+            end = Math.max(end, p);
+        }
+        while(st < end){
+            int mid = st + (end - st) / 2;
+            if(finish(piles, mid, h)){
+                end = mid;
+            }
+            else st = mid + 1;
+        }
+        return st;
+    }
+    public boolean finish(int[] piles, int k, int h){
+        int time = 0;
+        for(int p : piles){
+            time += (p + k - 1) / k;
+        }
+        return time <= h;
+    }
+}
