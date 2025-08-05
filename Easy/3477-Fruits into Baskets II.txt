@@ -1,0 +1,20 @@
+//Fruits into Baskets II
+
+class Solution {
+    public int numOfUnplacedFruits(int[] fruits, int[] baskets) {
+        int n = fruits.length, b = baskets.length;
+        int count = 0;
+
+        for(int i=0; i<n; i++){
+            for(int j=0; j<b; j++){
+                if(baskets[j] >= fruits[i]){
+                    count++;
+                    baskets[j] = 0;
+                    break;
+                }
+            }
+        }
+
+        return n-count;
+    }
+}
