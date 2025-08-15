@@ -1,0 +1,20 @@
+//Binary Tree Tilt
+
+class Solution {
+    private int sum = 0;
+    public int findTilt(TreeNode root) {
+        sumOfTilt(root);
+        return sum;
+    }
+
+    private int sumOfTilt(TreeNode root){
+        if(root == null) return 0;
+
+        int left = sumOfTilt(root.left);
+        int right = sumOfTilt(root.right);
+
+        sum += Math.abs(left - right);
+
+        return left + right + root.val;
+    }
+}
