@@ -1,0 +1,36 @@
+//Maximum 69 Number
+
+//Approach 1
+class Solution {
+    public int maximum69Number (int num) {
+        int max = num;
+        StringBuilder sb = new StringBuilder(Integer.toString(num));
+        for(int i=0; i<sb.length(); i++){
+            StringBuilder temp = new StringBuilder(sb.toString());
+            if(temp.charAt(i) == '9') temp.setCharAt(i, '6');
+            else temp.setCharAt(i, '9');
+
+            max = Math.max(max, Integer.parseInt(temp.toString()));
+        }
+
+        return max;
+    }
+}
+
+
+//Approach 2
+class Solution {
+    public int maximum69Number (int num) {
+        int max = num;
+        StringBuilder sb = new StringBuilder(Integer.toString(num));
+        for(int i=0; i<sb.length(); i++){
+            StringBuilder temp = new StringBuilder(sb.toString());
+            if(temp.charAt(i) == '9') temp.setCharAt(i, '6');
+            else temp.setCharAt(i, '9');
+
+            max = Math.max(max, Integer.parseInt(temp.toString()));
+        }
+
+        return max;
+    }
+}
