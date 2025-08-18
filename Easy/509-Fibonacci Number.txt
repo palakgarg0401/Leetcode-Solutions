@@ -1,0 +1,25 @@
+//Fibonacci Number
+
+//Approach 1 (Recursion)
+class Solution {
+    public int fib(int n) {
+        if(n == 0 || n == 1) return n;
+
+        return fib(n - 1) + fib(n - 2);
+    }
+}
+
+//Approach 2 (While loop)
+class Solution {
+    public int fib(int n) {
+        if(n == 0 || n == 1) return n;
+
+        int a = 0, b = 1;
+        while(n-- > 0){
+            int temp = a;
+            a = b;
+            b += temp;
+        }
+        return a;
+    }
+}
