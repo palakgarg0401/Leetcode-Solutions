@@ -1,0 +1,26 @@
+//Self Dividing Numbers
+
+class Solution {
+    private boolean selfDivide(int n){
+        if(n == 0) return false;
+        if(n >= 1 && n <= 9) return true;
+
+        int temp = n;
+        while(temp > 0){
+            int r = temp % 10;
+            if(r == 0) return false;
+            if(n % r != 0) return false;
+            temp /= 10;
+        }
+
+        return true;
+    }
+    public List<Integer> selfDividingNumbers(int left, int right) {
+        List<Integer> list = new ArrayList<>();
+        for(int i = left; i <= right; i++){
+            if(selfDivide(i)) list.add(i);
+        }
+
+        return list;
+    }
+}
