@@ -1,5 +1,6 @@
 //Self Dividing Numbers
 
+//Approach 1
 class Solution {
     private boolean selfDivide(int n){
         if(n == 0) return false;
@@ -10,6 +11,28 @@ class Solution {
             int r = temp % 10;
             if(r == 0) return false;
             if(n % r != 0) return false;
+            temp /= 10;
+        }
+
+        return true;
+    }
+    public List<Integer> selfDividingNumbers(int left, int right) {
+        List<Integer> list = new ArrayList<>();
+        for(int i = left; i <= right; i++){
+            if(selfDivide(i)) list.add(i);
+        }
+
+        return list;
+    }
+}
+
+//Approach 2
+class Solution {
+    private boolean selfDivide(int n){
+        int temp = n;
+        while(temp > 0){
+            int r = temp % 10;
+            if(r == 0 || n % r != 0) return false;
             temp /= 10;
         }
 
