@@ -1,0 +1,37 @@
+//Set Mismatch
+
+//Approach 1
+class Solution {
+    public int[] findErrorNums(int[] arr) {
+        int n = arr.length;
+        Arrays.sort(arr);
+        int[] res = new int[2];
+        int sum = arr[0];
+
+        for(int i = 1; i < n; i++){
+            if(arr[i] == arr[i - 1]) res[0] = arr[i - 1];
+            sum += arr[i];
+        }
+        sum -= res[0];
+        int totalSum = (n * (n + 1)) / 2;
+        res[1] = totalSum - sum;
+
+        return res;
+    }
+}
+
+//Approach 2
+class Solution {
+    public int[] findErrorNums(int[] nums) {
+        int dup = 0, miss = 0;
+        int[] arr = new int[nums.length + 1];
+        for(int n : nums) arr[n]++;
+
+        for(int i = 1; i < arr.length; i++){
+            if(arr[i] == 0) miss = i;
+            if(arr[i] > 1) dup = i;
+        }
+
+        return new int[]{dup, miss};
+    }
+}
