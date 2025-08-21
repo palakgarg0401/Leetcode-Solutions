@@ -1,0 +1,23 @@
+//Subsets
+
+class Solution {
+    private List<List<Integer>> list = new ArrayList<>();
+    private void sub(int[] nums, List<Integer> lst, int i){
+        if(i == nums.length){
+            list.add(new ArrayList<>(lst));
+            return;
+        }
+
+        lst.add(nums[i]);
+        sub(nums, lst, i + 1);
+
+        lst.remove(lst.size() - 1);
+
+        sub(nums, lst, i + 1);
+    }
+    public List<List<Integer>> subsets(int[] nums) {
+        sub(nums, new ArrayList<Integer>(), 0);
+
+        return list;
+    }
+}
