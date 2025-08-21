@@ -1,0 +1,28 @@
+//Subsets II
+
+class Solution {
+    private void sub(int[] nums,int i, List<Integer> lst, List<List<Integer>> list){
+        if(i == nums.length){
+            list.add(new ArrayList<>(lst));
+            return;
+        }
+
+        lst.add(nums[i]);
+        sub(nums, i + 1, lst, list);
+
+        lst.remove(lst.size() - 1);
+
+        int idx = i + 1;
+        while(idx < nums.length && nums[idx] == nums[idx - 1]) idx++;
+
+        sub(nums, idx, lst, list);
+    }
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> list = new ArrayList<>();
+        List<Integer> lst = new ArrayList<>();
+
+        sub(nums, 0, lst, list);
+        return list;
+    }
+}
