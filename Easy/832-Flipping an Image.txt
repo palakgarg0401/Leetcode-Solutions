@@ -1,0 +1,28 @@
+//Flipping an Image
+
+class Solution {
+    public int[][] flipAndInvertImage(int[][] image) {
+        for(int[] i : image) {
+            reverse(i);
+            for(int j = 0; j < i.length; j++) {
+                if(i[j] == 0) i[j] = 1;
+                else i[j] = 0;
+            }
+        }
+
+        return image;
+    }
+
+    private void reverse(int[] arr) {
+        int st = 0, end = arr.length - 1;
+
+        while(st <= end) {
+            int temp = arr[st];
+            arr[st] = arr[end];
+            arr[end] = temp;
+
+            st++;
+            end--;
+        }
+    }
+}
