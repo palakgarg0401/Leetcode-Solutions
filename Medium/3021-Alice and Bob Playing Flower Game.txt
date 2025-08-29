@@ -1,0 +1,26 @@
+//Alice and Bob Playing Flower Game
+
+class Solution {
+    public long flowerGame(int n, int m) {
+        int oddN, evenN, oddM, evenM;
+        if(n % 2 == 1) {
+            oddN = (n / 2) + 1;
+            evenN = n / 2;
+        }
+        else {
+            oddN = n / 2;
+            evenN = n / 2;
+        }
+
+        if(m % 2 == 1) {
+            oddM = (m / 2) + 1;
+            evenM = m / 2;
+        }
+        else {
+            oddM = m / 2;
+            evenM = m / 2;
+        }
+
+        return (long)oddN * evenM + (long)oddM * evenN;
+    }
+}
