@@ -1,0 +1,11 @@
+//Find Closest Person
+
+class Solution {
+    public int findClosest(int x, int y, int z) {
+        int posX = Math.abs(z - x);
+        int posY = Math.abs(z - y);
+        if(posX < posY) return 1;
+        else if(posX > posY) return 2;
+        else return 0;
+    }
+}
