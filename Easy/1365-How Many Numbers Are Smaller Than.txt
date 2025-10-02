@@ -1,0 +1,22 @@
+// How Many Numbers Are Smaller Than the Current Number
+
+class Solution {
+    public int[] smallerNumbersThanCurrent(int[] nums) {
+        int[] arr = new int[nums.length];
+        int i = 0;
+        for(int n : nums) arr[i++] = n;
+        Arrays.sort(arr);
+
+        Map<Integer, Integer> map = new HashMap<>();
+        for(int j = 0; j < arr.length; j++){
+            if(!map.containsKey(arr[j])) map.put(arr[j], j);
+        }
+        
+        i = 0;
+        for(int n : nums){
+            arr[i++] = map.get(n);
+        }
+
+        return arr;
+    }
+}
