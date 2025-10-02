@@ -1,5 +1,6 @@
 //Search Insert Position
 
+// Approach 1
 class Solution {
     public int searchInsert(int[] nums, int target) {
         int a = 0;
@@ -8,5 +9,22 @@ class Solution {
             if(nums[i]<target) a++;
         }
         return a;
+    }
+}
+
+// Approach 2
+class Solution {
+    public int searchInsert(int[] nums, int target) {
+        int l = 0, r = nums.length - 1;
+        int mid = 0;
+        while( l < r && target != nums[mid]){
+            mid = l + (r - l) / 2;
+
+            if(target < nums[mid]) r = mid; 
+            else l = mid + 1;
+        }
+        if(target == nums[mid]) return mid;
+        else if(target > nums[r]) return r + 1;
+        else return l;
     }
 }
