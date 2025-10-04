@@ -1,5 +1,6 @@
 //Single Number
 
+// Approach 1
 import java.util.Arrays;
 class Solution {
     public int singleNumber(int[] nums) {
@@ -11,5 +12,15 @@ class Solution {
             if(nums[i] != nums[i-1] && nums[i] != nums[i+1]) return nums[i];
         }
         return -1;
+    }
+}
+
+// Approach 2
+class Solution {
+    public int singleNumber(int[] nums) {
+        int xor = 0;
+        for(int n : nums) xor ^= n;
+
+        return xor;
     }
 }
