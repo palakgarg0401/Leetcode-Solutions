@@ -1,0 +1,56 @@
+// Find Mode in Binary Search Tree
+
+// Approach 1
+class Solution {
+    private void freq(TreeNode root, int[] arr){
+        if(root == null) return;
+        arr[root.val + 100000]++;
+
+        freq(root.left, arr);
+        freq(root.right, arr);
+    }
+    public int[] findMode(TreeNode root) {
+        int[] arr = new int[200001];
+        freq(root, arr);
+
+        int max = 0;
+        for(int a : arr) max = Math.max(max, a);
+
+        List<Integer> list = new ArrayList<>();
+        for(int i = 0; i < arr.length; i++){
+            if(arr[i] == max) list.add(i - 100000);
+        }
+
+        int[] res = new int[list.size()];
+        for(int i = 0; i < list.size(); i++) res[i] = list.get(i);
+
+        return res;
+    }
+}
+
+// Approach 2
+class Solution {
+    private int max = 0;
+    private void freq(TreeNode root, int[] arr){
+        if(root == null) return;
+        arr[root.val + 100000]++;
+        max = Math.max(max, arr[root.val + 100000]);
+        freq(root.left, arr);
+        freq(root.right, arr);
+    }
+    public int[] findMode(TreeNode root) {
+        int[] arr = new int[200001];
+        
+        freq(root, arr);
+
+        List<Integer> list = new ArrayList<>();
+        for(int i = 0; i < arr.length; i++){
+            if(arr[i] == max) list.add(i - 100000);
+        }
+
+        int[] res = new int[list.size()];
+        for(int i = 0; i < list.size(); i++) res[i] = list.get(i);
+
+        return res;
+    }
+}
