@@ -1,5 +1,6 @@
 // Find Resultant Array After Removing Anagrams
 
+// Approach 1
 class Solution {
     private boolean isAnagram(String x, String y){
         int[] arr = new int[26];
@@ -21,6 +22,33 @@ class Solution {
             if(isAnagram(list.get(i), list.get(i - 1))){
                 list.remove(i);
                 i--;
+            }
+        }
+
+        return list;
+    }
+}
+
+// Approach 2
+class Solution {
+    private boolean isAnagram(String x, String y){
+        if(x.length() != y.length()) return false;
+        int[] arr = new int[26];
+        for(char ch : x.toCharArray()) arr[ch - 'a']++;
+
+        for(char ch : y.toCharArray()) arr[ch - 'a']--;
+
+        for(int a : arr) if(a != 0) return false;
+
+        return true;
+    }
+    public List<String> removeAnagrams(String[] words) {
+        List<String> list = new ArrayList<>();
+        list.add(words[0]);
+
+        for(int i = 1; i < words.length; i++){
+            if(!isAnagram(words[i], words[i - 1])){
+                list.add(words[i]);
             }
         }
 
