@@ -1,0 +1,29 @@
+// Find Resultant Array After Removing Anagrams
+
+class Solution {
+    private boolean isAnagram(String x, String y){
+        int[] arr = new int[26];
+        for(char ch : x.toCharArray()) arr[ch - 'a']++;
+
+        for(char ch : y.toCharArray()) arr[ch - 'a']--;
+
+        for(int a : arr) if(a != 0) return false;
+
+        return true;
+    }
+    public List<String> removeAnagrams(String[] words) {
+        List<String> list = new ArrayList<>();
+        for(String s : words) list.add(s);
+
+        if(list.size() == 1) return list;
+
+        for(int i = 1; i < list.size(); i++){
+            if(isAnagram(list.get(i), list.get(i - 1))){
+                list.remove(i);
+                i--;
+            }
+        }
+
+        return list;
+    }
+}
