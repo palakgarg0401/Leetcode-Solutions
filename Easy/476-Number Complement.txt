@@ -1,0 +1,14 @@
+// Number Complement
+
+class Solution {
+    public int findComplement(int num) {
+        int n = num;
+        int count = 0;
+        while(n > 0){
+            count++;
+            n /= 2;
+        }
+
+        return ((1 << count) - 1) - num;
+    }
+}
