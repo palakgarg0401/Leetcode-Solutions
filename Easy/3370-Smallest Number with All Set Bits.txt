@@ -1,0 +1,40 @@
+// Smallest Number with All Set Bits
+
+// Approach 1
+class Solution {
+    public int smallestNumber(int n) {
+        int cnt = 0;
+        while(n > 0){
+            cnt++;
+            n /= 2;
+        }
+        int sum = 0;
+        for(int i = 0; i < cnt; i++) sum += (int)Math.pow(2, i);
+
+        return sum;
+    }
+}
+
+// Approach 2
+class Solution {
+    public int smallestNumber(int n) {
+        int cnt = 0;
+        while(n > 0){
+            cnt++;
+            n /= 2;
+        }
+        int res = (int)Math.pow(2, cnt);
+
+        return res - 1;
+    }
+}
+
+// Approach 3
+class Solution {
+    public int smallestNumber(int n) {
+        int x = n;
+        while((x & (x + 1)) != 0) x++;
+
+        return x;
+    }
+}
