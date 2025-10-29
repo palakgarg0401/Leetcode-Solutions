@@ -1,5 +1,6 @@
 // Binary Tree Right Side View
 
+// Approach 1
 class Solution {
     public List<Integer> rightSideView(TreeNode root) {
         List<Integer> res = new ArrayList<>();
@@ -18,6 +19,25 @@ class Solution {
             }
             res.add(list.get(list.size() - 1));
         }
+
+        return res;
+    }
+}
+
+// Approach 2
+lass Solution {
+    private void right(TreeNode root, int level, List<Integer> res){
+        if(root == null) return;
+
+        if(level == res.size()) res.add(root.val);
+
+        right(root.right, level + 1, res);
+        right(root.left, level + 1, res);
+    }
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        if(root == null) return res;
+        right(root, 0, res);
 
         return res;
     }
