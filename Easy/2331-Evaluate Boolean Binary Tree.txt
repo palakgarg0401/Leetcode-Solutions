@@ -1,0 +1,18 @@
+// Evaluate Boolean Binary Tree
+
+class Solution {
+    private void helper(TreeNode root){
+        if(root == null) return;
+        if(root.left == null && root.right == null) return;
+        
+        helper(root.left);
+        helper(root.right);
+
+        if(root.val == 2) root.val = root.left.val | root.right.val;
+        else root.val = root.left.val & root.right.val;
+    }
+    public boolean evaluateTree(TreeNode root) {
+        helper(root);
+        return (root.val == 0) ? false : true;
+    }
+}
