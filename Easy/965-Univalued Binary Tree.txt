@@ -1,0 +1,13 @@
+// Univalued Binary Tree
+
+class Solution {
+    private boolean uni(TreeNode root, int val){
+        if(root == null) return true;
+        if(root.val != val) return false;
+        return uni(root.left, val) && uni(root.right, val);
+    }
+    public boolean isUnivalTree(TreeNode root) {
+        if(root == null) return true;
+        return uni(root, root.val);
+    }
+}
