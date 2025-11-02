@@ -1,0 +1,54 @@
+// Sum of Root To Leaf Binary Numbers
+
+// Approach 1
+class Solution {
+    private void binary(TreeNode root, List<Integer> list, List<Integer> res){
+        if(root == null) return;
+        list.add(root.val);
+        if(root.left == null && root.right == null){
+            int n = list.size() - 1, sum = 0;
+            int k = n;
+            for(int i = 0; i <= n; i++){
+                sum += (list.get(k--) * (int)Math.pow(2, i));
+            }
+            res.add(sum);
+        }
+        else{
+            binary(root.left, list, res);
+            binary(root.right, list, res);
+        }
+        list.remove(list.size() - 1);
+    }
+    public int sumRootToLeaf(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
+        binary(root, list, res);
+        System.out.println(res);
+        int sum = 0;
+        for(int r : res) sum += r;
+
+        return sum;
+    }
+}
+
+// Approach 2
+class Solution {
+    private int sum = 0;
+    private void binary(TreeNode root, StringBuilder sb){
+        if(root == null) return;
+        sb.append(root.val);
+        if(root.left == null && root.right == null){
+            sum += Integer.parseInt(sb.toString(), 2);
+        }
+        else{
+            binary(root.left, sb);
+            binary(root.right, sb);
+        }
+        sb.deleteCharAt(sb.length() - 1);
+    }
+    public int sumRootToLeaf(TreeNode root) {
+        StringBuilder sb = new StringBuilder();
+        binary(root, sb);
+        return sum;
+    }
+}
