@@ -1,0 +1,21 @@
+// Increasing Order Search Tree
+
+class Solution {
+    private TreeNode helper(TreeNode root, TreeNode tail){
+        if(root == null) return tail;
+        tail = helper(root.left, tail);
+
+        TreeNode curr = new TreeNode(root.val);
+        tail.right = curr;
+        tail = curr;
+
+        tail = helper(root.right, tail);
+
+        return tail;
+    }
+    public TreeNode increasingBST(TreeNode root) {
+        TreeNode newRoot = new TreeNode(0);
+        helper(root, newRoot);
+        return newRoot.right;
+    }
+}
