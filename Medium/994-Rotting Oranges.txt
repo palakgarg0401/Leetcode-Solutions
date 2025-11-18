@@ -1,0 +1,46 @@
+// Rotting Oranges
+
+class Node{
+    int row, col, time;
+    Node(int row, int col, int time){
+        this.row = row;
+        this.col = col;
+        this.time = time;
+    }
+}
+class Solution {
+    int[][] dir = new int[][]{{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+
+    public boolean isValid(int row, int col, int m, int n){
+        return row >= 0 && row < m && col >= 0 && col < n;
+    }
+    public int orangesRotting(int[][] grid) {
+        int m = grid.length, n = grid[0].length;
+        int fresh = 0;
+        Queue<Node> q = new ArrayDeque<>();
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                if(grid[i][j] == 2) q.offer(new Node(i, j, 0));
+                else if(grid[i][j] == 1) fresh++;
+            }
+        }
+        if(q.size() == (m * n)) return 0;
+        int minTime = 0;
+
+        while(!q.isEmpty()){
+            Node curr = q.poll();
+            for(int[] d : dir){
+                int newRow = curr.row + d[0];
+                int newCol = curr.col + d[1];
+                if(isValid(newRow, newCol, m, n) && grid[newRow][newCol] == 1){
+                    grid[newRow][newCol] = 2;
+                    fresh--;
+                    q.offer(new Node(newRow, newCol, curr.time + 1));
+                    minTime = curr.time + 1;
+                }
+            }
+        }
+
+        return (fresh == 0) ? minTime : -1;
+    }
+}
