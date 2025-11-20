@@ -1,0 +1,30 @@
+// Course Schedule II
+
+class Solution {
+    public int[] findOrder(int num, int[][] prerequisites) {
+        int[] ans = new int[num];
+        List<List<Integer>> adj = new ArrayList<>();
+        int[] inDeg = new int[num];
+        for(int i = 0; i < num; i++) adj.add(new ArrayList<>());
+        for(int[] p : prerequisites){
+            adj.get(p[1]).add(p[0]);
+            inDeg[p[0]]++;
+        }
+
+        Queue<Integer> q = new ArrayDeque<>();
+        for(int i = 0; i < num; i++) if(inDeg[i] == 0) q.offer(i);
+
+        int j = 0;
+        while(!q.isEmpty()){
+            int src = q.poll();
+            ans[j++] = src;
+            for(int nbr : adj.get(src)){
+                inDeg[nbr]--;
+                if(inDeg[nbr] == 0) q.offer(nbr);
+            }
+        }
+        if(j != num) return new int[0];
+
+        return ans;
+    }
+}
