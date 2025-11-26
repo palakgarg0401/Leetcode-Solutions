@@ -1,0 +1,37 @@
+// Construct Binary Search Tree from Preorder Traversal
+
+// Approach 1
+class Solution {
+    public TreeNode insert(TreeNode root, int ele){
+        if(root == null){
+            TreeNode temp = new TreeNode(ele);
+            return temp;
+        }
+        if(root.val > ele) root.left = insert(root.left, ele);
+        else root.right = insert(root.right, ele);
+
+        return root;
+    }
+    public TreeNode bstFromPreorder(int[] preorder) {
+        TreeNode root = null;
+        for(int p : preorder) root = insert(root, p);
+        return root;
+    }
+}
+
+// Approach 2
+class Solution {
+    private int idx = 0;
+    public TreeNode insert(int[] pre, int min, int max){
+        if(idx == pre.length || pre[idx] < min || pre[idx] > max) return null;
+
+        TreeNode root = new TreeNode(pre[idx++]);
+        root.left = insert(pre, min, root.val);
+        root.right = insert(pre, root.val, max);
+
+        return root;
+    }
+    public TreeNode bstFromPreorder(int[] preorder) {
+        return insert(preorder, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+}
