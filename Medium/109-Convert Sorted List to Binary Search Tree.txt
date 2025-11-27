@@ -1,0 +1,50 @@
+// Convert Sorted List to Binary Search Tree
+
+// Approach 1
+class Solution {
+    public TreeNode helper(List<Integer> list, int st, int end){
+        if(st > end) return null;
+        int mid = st + (end - st) / 2;
+        TreeNode root = new TreeNode(list.get(mid));
+        root.left = helper(list, st, mid - 1);
+        root.right = helper(list, mid + 1, end);
+
+        return root;
+    }
+    public TreeNode sortedListToBST(ListNode head) {
+        List<Integer> list = new ArrayList<>();
+        ListNode temp = head;
+        while(temp != null){
+            list.add(temp.val);
+            temp = temp.next;
+        }
+        return helper(list, 0, list.size() - 1);
+    }
+}
+
+// Approach 2
+class Solution {
+    public TreeNode sortedListToBST(ListNode head) {
+        if(head == null) return null;
+        if(head.next == null) return new TreeNode(head.val);
+
+        ListNode prev = head;
+        ListNode slow = head;
+        ListNode fast = head;
+
+        while(fast != null && fast.next != null){
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        prev.next = null;
+        TreeNode node = new TreeNode(slow.val);
+
+        if(slow != head) node.left = sortedListToBST(head);
+
+        node.right = sortedListToBST(slow.next);
+
+        return node;
+    }
+}
