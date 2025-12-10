@@ -1,0 +1,22 @@
+// Merge Triplets to Form Target Triplet
+
+class Solution {
+    public boolean mergeTriplets(int[][] triplets, int[] target) {
+        boolean foundA = false;
+        boolean foundB = false;
+        boolean foundC = false;
+
+        int tx = target[0], ty = target[1], tz = target[2];
+        for(int[] t : triplets){
+            if(t[0] > tx || t[1] > ty || t[2] > tz) continue;
+
+            if(t[0] == tx) foundA = true;
+            if(t[1] == ty) foundB = true;
+            if(t[2] == tz) foundC = true;
+
+            if(foundA && foundB && foundC) return true;
+        }
+
+        return false;
+    }
+}
