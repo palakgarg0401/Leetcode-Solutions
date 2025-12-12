@@ -1,0 +1,20 @@
+// Flood Fill
+
+class Solution {
+    public int[][] floodFill(int[][] image, int sr, int sc, int color) {
+        int old = image[sr][sc];
+        if(old == color) return image;
+        int m = image.length, n = image[0].length;
+        fill(image, m, n, sr, sc, old, color);
+        return image;
+    }
+    public void fill(int[][] image, int m, int n, int sr, int sc, int old, int color){
+        if(sr < 0 || sr >= m || sc < 0 || sc >= n) return;
+        if(image[sr][sc] != old) return;
+        image[sr][sc] = color;
+        fill(image, m, n, sr - 1, sc, old, color);
+        fill(image, m, n, sr, sc + 1, old, color);
+        fill(image, m, n, sr + 1, sc, old, color);
+        fill(image, m, n, sr, sc - 1, old, color);
+    }
+}
