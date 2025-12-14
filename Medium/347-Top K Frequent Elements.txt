@@ -1,0 +1,21 @@
+// Top K Frequent Elements
+
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        int n = nums.length;
+        int[] freq = new int[20001];
+        for(int num : nums) freq[num + 10000]++;
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> b[0] - a[0]);
+        for(int i = 0; i < freq.length; i++){
+            if(freq[i] > 0){
+                pq.offer(new int[]{freq[i], i - 10000});
+            }
+        }
+        int[] ans = new int[k];
+        for(int i = 0; i < k; i++){
+            int[] curr = pq.poll();
+            ans[i] = curr[1];
+        }
+        return ans;
+    }
+}
