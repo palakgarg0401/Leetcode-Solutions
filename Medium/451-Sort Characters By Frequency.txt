@@ -1,5 +1,36 @@
 // Sort Characters By Frequency
 
+// Approach 1
+class Solution {
+    public String frequencySort(String s) {
+        Map<Character, Integer> map = new HashMap<>();
+
+        for(int i=0; i<s.length(); i++){
+            map.put(s.charAt(i), map.getOrDefault(s.charAt(i), 0) + 1);
+        }
+        List<Integer> list = new ArrayList<>(map.values());
+        Collections.sort(list, Collections.reverseOrder());
+
+        Set<Character> used = new HashSet<>();
+
+        StringBuilder res = new StringBuilder();
+        for(int freq : list){
+            for(char key : map.keySet()){
+                if(map.get(key) == freq && !used.contains(key)) {
+                    for(int j=0; j<freq; j++){
+                        res.append(key);
+                    }
+                    used.add(key);
+                    break;
+                }
+            }
+        }
+        
+        return res.toString();
+    }
+}
+
+// Approach 2
 class Solution {
     public String frequencySort(String s) {
         int[] freq = new int[128];
