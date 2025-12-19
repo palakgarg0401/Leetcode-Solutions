@@ -1,0 +1,27 @@
+// Number of Islands
+
+class Solution {
+    public int numIslands(char[][] grid) {
+        int m = grid.length, n = grid[0].length;
+        int res = 0;
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                if(grid[i][j] == '1'){
+                    flood(grid, i, j);
+                    res++;
+                }
+            }
+        }
+        return res;
+    }
+    public void flood(char[][] grid, int x, int y){
+        int m = grid.length, n = grid[0].length;
+        if(x < 0 || y < 0 || x >= m || y >= n) return;
+        if(grid[x][y] == '0') return;
+        grid[x][y] = '0';
+        flood(grid, x, y - 1);
+        flood(grid, x, y + 1);
+        flood(grid, x - 1, y);
+        flood(grid, x + 1, y);
+    }
+}
