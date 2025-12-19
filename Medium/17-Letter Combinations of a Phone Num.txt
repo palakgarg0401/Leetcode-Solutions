@@ -1,0 +1,23 @@
+// Letter Combinations of a Phone Number
+
+class Solution {
+    public void backtrack(int idx, String digits, StringBuilder curr, List<String> res, String[] map){
+        if(idx == digits.length()){
+            res.add(curr.toString());
+            return;
+        }
+        String letters = map[digits.charAt(idx) - '0'];
+
+        for(char l : letters.toCharArray()){
+            curr.append(l);
+            backtrack(idx + 1, digits, curr, res, map);
+            curr.deleteCharAt(curr.length() - 1);
+        }
+    }
+    public List<String> letterCombinations(String digits) {
+        List<String> res = new ArrayList<>();
+        String[] map = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        backtrack(0, digits, new StringBuilder(), res, map);
+        return res;
+    }
+}
