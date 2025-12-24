@@ -1,0 +1,17 @@
+// Apple Redistribution into Boxes
+
+class Solution {
+    public int minimumBoxes(int[] apple, int[] capacity) {
+        int sum  = 0;
+        for(int a : apple) sum += a;
+        int sumC = 0, count = 0;
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        for(int c : capacity) pq.offer(c);
+        while(pq.size() > 0){
+            sumC += pq.poll();
+            count++;
+            if(sumC >= sum) break;
+        }
+        return count;
+    }
+}
