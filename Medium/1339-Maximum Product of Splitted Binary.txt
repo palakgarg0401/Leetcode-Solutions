@@ -1,0 +1,25 @@
+// Maximum Product of Splitted Binary Tree
+
+class Solution {
+    private long totalSum = 0;
+    private long max = 0;
+    private static final int mod = 1000000007;
+    public long getSum(TreeNode root){
+        if(root == null) return 0;
+        return root.val + getSum(root.left) + getSum(root.right);
+    }
+    public long dfs(TreeNode root){
+        if(root == null) return 0;
+        long left = dfs(root.left);
+        long right = dfs(root.right);
+        long sum = left + right + root.val;
+        long prd = sum * (totalSum - sum);
+        max = Math.max(max, prd);
+        return sum;
+    }
+    public int maxProduct(TreeNode root) {
+        totalSum = getSum(root);
+        dfs(root);
+        return (int)(max % mod);
+    }
+}
