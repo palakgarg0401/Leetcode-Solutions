@@ -1,0 +1,33 @@
+// Lowest Common Ancestor of Deepest Leaves
+
+class Solution {
+    public TreeNode lca(TreeNode root, Set<TreeNode> set){
+        if(root == null) return null;
+        if(set.contains(root)) return root;
+        
+        TreeNode left = lca(root.left, set);
+        TreeNode right = lca(root.right, set);
+
+        if(left != null && right != null) return root;
+
+        return left != null ? left : right;
+    }
+    public TreeNode lcaDeepestLeaves(TreeNode root) {
+        if(root == null) return null;
+        Set<TreeNode> set = new HashSet<>();
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(root);
+        while(!q.isEmpty()){
+            int size = q.size();
+            set = new HashSet<>();
+            for(int i = 0; i < size; i++){
+                TreeNode curr = q.poll();
+                set.add(curr);
+                if(curr.left != null) q.offer(curr.left);
+                if(curr.right != null) q.offer(curr.right);
+            }
+        }
+
+        return lca(root, set);
+    }
+}
